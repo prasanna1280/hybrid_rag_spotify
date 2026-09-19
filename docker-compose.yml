@@ -1,0 +1,17 @@
+services:
+  hybrid-rag:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hybrid-rag
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+    command: >
+      streamlit run app.py
+      --server.address=0.0.0.0
+      --server.port=8501
