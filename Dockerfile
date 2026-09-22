@@ -19,7 +19,8 @@ RUN python -m pip install --upgrade pip setuptools wheel && \
 
 COPY . .
 
-# Cache the embedding model in the image so the container does not download it at startup.
+# Cache the local embedding model in the image so normal startup does not need
+# to download it. DeepEval judge calls still use the configured OpenAI API.
 RUN python -c "from sentence_transformers import SentenceTransformer; from config import LOCAL_EMBEDDING_MODEL; SentenceTransformer(LOCAL_EMBEDDING_MODEL)"
 
 EXPOSE 8501

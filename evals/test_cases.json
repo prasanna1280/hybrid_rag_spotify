@@ -1,31 +1,170 @@
 [
   {
+    "id": "T01",
+    "category": "Databases",
     "question": "Which database stores users, profiles, subscriptions and playlists?",
-    "expected_pages": [
-      1,
-      3
-    ]
+    "expected_pages": [1, 3],
+    "expected_output": "PostgreSQL stores relational data including users, profiles, subscriptions and playlists. The data storage layout also lists users, profiles, subscriptions, playlists and follows under PostgreSQL."
   },
   {
-    "question": "What service handles playback state and real-time player updates?",
-    "expected_pages": [
-      2
-    ]
+    "id": "T02",
+    "category": "Search",
+    "question": "Which technology is used for full-text search and autocomplete?",
+    "expected_pages": [1, 2, 3],
+    "expected_output": "Elasticsearch or OpenSearch is used for full-text search and autocomplete. The Search & Discovery Index Service is powered by Elasticsearch/OpenSearch."
   },
   {
-    "question": "Which technologies are used for vector search and the knowledge graph in this RAG design?",
-    "expected_pages": []
+    "id": "T03",
+    "category": "Playback",
+    "question": "Which service stores playback state and manages playback sessions?",
+    "expected_pages": [2],
+    "expected_output": "The Playback & Session Service stores playback state such as the current track, position, shuffle, repeat and queue, and manages playback sessions and active devices."
   },
   {
-    "question": "What are the main responsibilities of the Search & Discovery Index Service?",
-    "expected_pages": [
-      2
-    ]
+    "id": "T04",
+    "category": "Catalog",
+    "question": "What relationships does the Catalog Service manage?",
+    "expected_pages": [1],
+    "expected_output": "The Catalog Service manages music metadata and relationships such as album-track and artist-track relationships."
   },
   {
+    "id": "T05",
+    "category": "Recommendations",
+    "question": "How does the Recommendation & Personalization Service generate recommendations?",
+    "expected_pages": [2],
+    "expected_output": "It computes user and item embeddings using listening history and audio features, and serves recommendations by seeds such as artists, tracks and genres."
+  },
+  {
+    "id": "T06",
+    "category": "Streaming",
+    "question": "What does the Streaming / Media Delivery Service do?",
+    "expected_pages": [2],
+    "expected_output": "It generates secure signed URLs for audio HLS manifests and segments, enforces subscription-tier rules such as bitrate and ads versus ad-free, and logs stream-start events for analytics."
+  },
+  {
+    "id": "T07",
+    "category": "Media Processing",
+    "question": "What is the role of the Media Processor Service?",
+    "expected_pages": [2],
+    "expected_output": "The Media Processor Service is a background worker for transcoding uploads with FFmpeg. It creates multiple bitrates and HLS manifests, generates waveforms and loudness normalization/audio analysis, writes processed files to object storage, and notifies Catalog and Streaming services."
+  },
+  {
+    "id": "T08",
+    "category": "Analytics",
+    "question": "Which database or warehouse stores playback and search events?",
+    "expected_pages": [3],
+    "expected_output": "ClickHouse or a similar data warehouse stores playback events, search events and clicks, along with aggregations such as daily active users, time listened and streams per track."
+  },
+  {
+    "id": "T09",
+    "category": "Caching",
+    "question": "What is Redis used for in the architecture?",
+    "expected_pages": [1, 3],
+    "expected_output": "Redis is used for caching and sessions. The storage layout also lists authentication/session cache, optional playback-state cache, rate limits and hot metadata caches."
+  },
+  {
+    "id": "T10",
+    "category": "Storage",
+    "question": "What is object storage used for?",
+    "expected_pages": [1, 3],
+    "expected_output": "S3-compatible object storage is used for audio and images. The storage layout lists HLS segments and manifests, cover images, avatars, thumbnails and podcast episodes."
+  },
+  {
+    "id": "T11",
+    "category": "Messaging",
+    "question": "Which message brokers are listed for internal communication?",
+    "expected_pages": [1, 3],
+    "expected_output": "Kafka, NATS and RabbitMQ are listed as message-bus options. The message queue section lists events such as track_uploaded, track_encoded, playback_event, subscription_updated and notification events."
+  },
+  {
+    "id": "T12",
+    "category": "API",
+    "question": "What technologies are listed for backend APIs and internal communication?",
+    "expected_pages": [1],
+    "expected_output": "The backend uses Node.js and TypeScript with NestJS. REST is listed for external APIs, while gRPC or a message bus such as Kafka, NATS or RabbitMQ is listed for internal communication."
+  },
+  {
+    "id": "T13",
+    "category": "Frontend",
+    "question": "Which frontend framework and language are used?",
+    "expected_pages": [1],
+    "expected_output": "The frontend uses Next.js with React and TypeScript."
+  },
+  {
+    "id": "T14",
+    "category": "Frontend State",
+    "question": "Which libraries are listed for global player state?",
+    "expected_pages": [1],
+    "expected_output": "Zustand, Recoil and Jotai are listed as options for global player state."
+  },
+  {
+    "id": "T15",
+    "category": "Playback Frontend",
+    "question": "Which technologies are listed for audio playback and visualizations?",
+    "expected_pages": [1],
+    "expected_output": "HLS.js together with HTML5 Audio and the Web Audio API is listed for playback and visualizations."
+  },
+  {
+    "id": "T16",
+    "category": "Authentication",
+    "question": "What authentication standards are listed?",
+    "expected_pages": [1],
+    "expected_output": "OAuth2 and OIDC-based authentication integration with the backend is listed."
+  },
+  {
+    "id": "T17",
+    "category": "Gateway",
+    "question": "What are the responsibilities of the API Gateway / BFF?",
+    "expected_pages": [1],
+    "expected_output": "The API Gateway/BFF is the single HTTP entrypoint for clients and handles authentication, rate limiting and schema validation, while aggregating data from underlying microservices."
+  },
+  {
+    "id": "T18",
+    "category": "Library",
+    "question": "What does the Library & Playlist Service manage?",
+    "expected_pages": [2],
+    "expected_output": "It implements Your Library for liked songs, saved albums and followed artists, and manages playlists including creation, editing, deletion, reordering, collaboration and privacy."
+  },
+  {
+    "id": "T19",
+    "category": "Subscription",
+    "question": "What does the Subscription & Billing Service handle?",
+    "expected_pages": [2],
+    "expected_output": "It manages subscription plans such as Free, Premium, Family and Student, integrates with payment gateways, and handles trials, renewals, invoicing and cancellations."
+  },
+  {
+    "id": "T20",
+    "category": "Notifications",
+    "question": "What channels does the Notification Service support?",
+    "expected_pages": [3],
+    "expected_output": "The Notification Service sends emails, push notifications and in-app notifications, and supports templates, user preference management and digest emails."
+  },
+  {
+    "id": "T21",
+    "category": "Security",
     "question": "What security and compliance capabilities are listed?",
-    "expected_pages": [
-      5
-    ]
+    "expected_pages": [5],
+    "expected_output": "The document lists HTTPS everywhere, secure cookies, HSTS, input validation and rate limiting at the gateway, RBAC for admin and internal tools, GDPR-style data export and account deletion, and audit logging for sensitive actions."
+  },
+  {
+    "id": "T22",
+    "category": "DevOps",
+    "question": "Which containerization and orchestration technologies are listed?",
+    "expected_pages": [1],
+    "expected_output": "Docker is listed for containerization, while Kubernetes with GKE, EKS or AKS is listed for orchestration."
+  },
+  {
+    "id": "T23",
+    "category": "Observability",
+    "question": "Which observability technologies are listed?",
+    "expected_pages": [1],
+    "expected_output": "Prometheus and Grafana are listed for observability, with central logging and tracing using OpenTelemetry."
+  },
+  {
+    "id": "T24",
+    "category": "Architecture",
+    "question": "How are media files moved from processing to delivery?",
+    "expected_pages": [2, 3],
+    "expected_output": "The Media Processor creates processed audio such as multiple bitrates and HLS manifests, writes processed files to object storage and notifies Catalog/Streaming services. The Streaming/Media Delivery Service generates secure signed URLs to HLS manifests and segments, while object storage and a CDN deliver audio and assets."
   }
 ]

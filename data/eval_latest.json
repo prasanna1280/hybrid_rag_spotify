@@ -1,0 +1,350 @@
+{
+  "generated_at": "2026-09-22T14:35:43.760152+00:00",
+  "evaluation_profile": "fast_retrieval_generation",
+  "deepeval_model": "gpt-4o-mini",
+  "threshold": 0.7,
+  "cases_evaluated": 5,
+  "answer_relevancy": 0.9333333333333333,
+  "contextual_precision": 0.6,
+  "contextual_recall": 0.9,
+  "retrieval_score": 0.75,
+  "generation_score": 0.9333333333333333,
+  "overall_score": 0.8416666666666667,
+  "page_hit_rate": 1.0,
+  "case_pass_rate": 0.4,
+  "faithfulness_evaluated": false,
+  "contextual_relevancy_evaluated": false,
+  "grounding_gate_met": true,
+  "target_met": true,
+  "cases": [
+    {
+      "id": "T01",
+      "category": "Databases",
+      "question": "Which database stores users, profiles, subscriptions and playlists?",
+      "expected_output": "PostgreSQL stores relational data including users, profiles, subscriptions and playlists. The data storage layout also lists users, profiles, subscriptions, playlists and follows under PostgreSQL.",
+      "actual_output": "The database stores users, profiles, subscriptions, and playlists (Page 3).",
+      "expected_pages": [
+        1,
+        3
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "page_hit": true,
+      "case_passed": false,
+      "metrics": {
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.0,
+        "contextual_recall": 1.0
+      },
+      "reasons": {
+        "answer_relevancy": "",
+        "contextual_precision": "",
+        "contextual_recall": ""
+      },
+      "self_rag": {
+        "grounded": true,
+        "issues": [],
+        "needs_revision": false
+      },
+      "sources": [
+        {
+          "page": 1,
+          "chunk_id": "chunk_2",
+          "vector_score": 0.01639,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_3",
+          "vector_score": 0.01613,
+          "graph_score": 0.0
+        },
+        {
+          "page": 4,
+          "chunk_id": "chunk_9",
+          "vector_score": 0.01587,
+          "graph_score": 0.0
+        },
+        {
+          "page": 3,
+          "chunk_id": "chunk_6",
+          "vector_score": 0.01562,
+          "graph_score": 0.0
+        },
+        {
+          "page": 5,
+          "chunk_id": "chunk_10",
+          "vector_score": 0.01538,
+          "graph_score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "T02",
+      "category": "Search",
+      "question": "Which technology is used for full-text search and autocomplete?",
+      "expected_output": "Elasticsearch or OpenSearch is used for full-text search and autocomplete. The Search & Discovery Index Service is powered by Elasticsearch/OpenSearch.",
+      "actual_output": "The technology used for full-text search and autocomplete is mentioned.\n\nSources: Page 5, Page 4, Page 2, Page 1",
+      "expected_pages": [
+        1,
+        2,
+        3
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "page_hit": true,
+      "case_passed": false,
+      "metrics": {
+        "answer_relevancy": 0.6666666666666666,
+        "contextual_precision": 0.0,
+        "contextual_recall": 1.0
+      },
+      "reasons": {
+        "answer_relevancy": "",
+        "contextual_precision": "",
+        "contextual_recall": ""
+      },
+      "self_rag": {
+        "grounded": false,
+        "issues": [
+          "The answer states that the technology is mentioned but does not specify what it is, which is a critical claim that is unsupported by the context."
+        ],
+        "needs_revision": true
+      },
+      "sources": [
+        {
+          "page": 5,
+          "chunk_id": "chunk_10",
+          "vector_score": 0.01639,
+          "graph_score": 0.0
+        },
+        {
+          "page": 4,
+          "chunk_id": "chunk_9",
+          "vector_score": 0.01613,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_3",
+          "vector_score": 0.01587,
+          "graph_score": 0.0
+        },
+        {
+          "page": 1,
+          "chunk_id": "chunk_1",
+          "vector_score": 0.01562,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_4",
+          "vector_score": 0.01538,
+          "graph_score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "T03",
+      "category": "Playback",
+      "question": "Which service stores playback state and manages playback sessions?",
+      "expected_output": "The Playback & Session Service stores playback state such as the current track, position, shuffle, repeat and queue, and manages playback sessions and active devices.",
+      "actual_output": "The service that stores playback state and manages playback sessions includes core tables for devices, playback_sessions, and playback_queue, and it specifically stores playback state such as current track, position, shuffle, repeat, and queue (Page 2).",
+      "expected_pages": [
+        2
+      ],
+      "retrieved_pages": [
+        2,
+        3,
+        4
+      ],
+      "page_hit": true,
+      "case_passed": false,
+      "metrics": {
+        "answer_relevancy": 1.0,
+        "contextual_precision": 1.0,
+        "contextual_recall": 0.5
+      },
+      "reasons": {
+        "answer_relevancy": "",
+        "contextual_precision": "",
+        "contextual_recall": ""
+      },
+      "self_rag": {
+        "grounded": true,
+        "issues": [],
+        "needs_revision": false
+      },
+      "sources": [
+        {
+          "page": 2,
+          "chunk_id": "chunk_3",
+          "vector_score": 0.01639,
+          "graph_score": 0.0
+        },
+        {
+          "page": 3,
+          "chunk_id": "chunk_7",
+          "vector_score": 0.01613,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_5",
+          "vector_score": 0.01587,
+          "graph_score": 0.0
+        },
+        {
+          "page": 4,
+          "chunk_id": "chunk_8",
+          "vector_score": 0.01562,
+          "graph_score": 0.0
+        },
+        {
+          "page": 4,
+          "chunk_id": "chunk_9",
+          "vector_score": 0.01538,
+          "graph_score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "T04",
+      "category": "Catalog",
+      "question": "What relationships does the Catalog Service manage?",
+      "expected_output": "The Catalog Service manages music metadata and relationships such as album-track and artist-track relationships.",
+      "actual_output": "The Catalog Service manages relationships such as album-track and artist-track (Page 1).",
+      "expected_pages": [
+        1
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        3
+      ],
+      "page_hit": true,
+      "case_passed": true,
+      "metrics": {
+        "answer_relevancy": 1.0,
+        "contextual_precision": 1.0,
+        "contextual_recall": 1.0
+      },
+      "reasons": {
+        "answer_relevancy": "",
+        "contextual_precision": "",
+        "contextual_recall": ""
+      },
+      "self_rag": {
+        "grounded": true,
+        "issues": [],
+        "needs_revision": false
+      },
+      "sources": [
+        {
+          "page": 1,
+          "chunk_id": "chunk_2",
+          "vector_score": 0.01639,
+          "graph_score": 0.01613
+        },
+        {
+          "page": 1,
+          "chunk_id": "chunk_1",
+          "vector_score": 0.01515,
+          "graph_score": 0.01639
+        },
+        {
+          "page": 3,
+          "chunk_id": "chunk_6",
+          "vector_score": 0.01613,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_4",
+          "vector_score": 0.01587,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_3",
+          "vector_score": 0.01562,
+          "graph_score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "T05",
+      "category": "Recommendations",
+      "question": "How does the Recommendation & Personalization Service generate recommendations?",
+      "expected_output": "It computes user and item embeddings using listening history and audio features, and serves recommendations by seeds such as artists, tracks and genres.",
+      "actual_output": "The Recommendation & Personalization Service generates recommendations by computing user and item embeddings using listening history and audio features, and it serves recommendations based on seeds such as artists, tracks, and genres (Page 2).",
+      "expected_pages": [
+        2
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "page_hit": true,
+      "case_passed": true,
+      "metrics": {
+        "answer_relevancy": 1.0,
+        "contextual_precision": 1.0,
+        "contextual_recall": 1.0
+      },
+      "reasons": {
+        "answer_relevancy": "",
+        "contextual_precision": "",
+        "contextual_recall": ""
+      },
+      "self_rag": {
+        "grounded": true,
+        "issues": [],
+        "needs_revision": false
+      },
+      "sources": [
+        {
+          "page": 2,
+          "chunk_id": "chunk_3",
+          "vector_score": 0.01613,
+          "graph_score": 0.01639
+        },
+        {
+          "page": 5,
+          "chunk_id": "chunk_10",
+          "vector_score": 0.01639,
+          "graph_score": 0.0
+        },
+        {
+          "page": 3,
+          "chunk_id": "chunk_6",
+          "vector_score": 0.01587,
+          "graph_score": 0.0
+        },
+        {
+          "page": 2,
+          "chunk_id": "chunk_4",
+          "vector_score": 0.01562,
+          "graph_score": 0.0
+        },
+        {
+          "page": 1,
+          "chunk_id": "chunk_2",
+          "vector_score": 0.01538,
+          "graph_score": 0.0
+        }
+      ]
+    }
+  ]
+}

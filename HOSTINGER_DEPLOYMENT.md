@@ -1,35 +1,110 @@
-# Hostinger VPS deployment
+# Hostinger VPS deployment — Hybrid RAG v3
 
 ## 1. Clone the GitHub repository
 
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd hybrid_rag_spotify
+```bash
+cd /opt
+git clone <YOUR_GITHUB_REPO_URL> hybrid_rag_spotify
+cd /opt/hybrid_rag_spotify
+```
 
-## 2. Create .env (never commit this file)
+For an existing clone:
 
+```bash
+cd /opt/hybrid_rag_spotify
+git pull origin main
+```
+
+## 2. Add environment variables
+
+Create the file locally on the VPS. Do not commit it:
+
+```bash
 nano .env
+```
 
-Set the working OpenAI and Neo4j values from your local setup.
+Use the values from `.env.example`. Keep secrets only in `.env`.
 
-## 3. Build the image
+## 3. Put the source PDF on the VPS
 
-docker compose build
+The application expects the supplied PDF for ingestion. Copy it into the project directory:
 
-## 4. First-time PDF ingestion
+```bash
+ls -lh spotify_web_app_architecture.pdf
+```
 
-mkdir -p data
+## 4. Build the Docker image
+
+```bash
+docker compose build --no-cache
+```
+
+## 5. Ingest the PDF into FAISS + Neo4j
+
+Run this once after a clean/new ingestion:
+
+```bash
 docker compose run --rm hybrid-rag python ingest.py --pdf spotify_web_app_architecture.pdf --clear-graph
+```
 
-## 5. Start the application
+## 6. Start the application
 
+```bash
 docker compose up -d
+```
 
-## 6. Verify
+## 7. Verify
 
+```bash
 docker compose ps
 docker compose logs -f hybrid-rag
+```
 
-Test from a browser:
-http://YOUR_VPS_IP:8501
+Open:
 
-For production, put an HTTPS reverse proxy/domain in front of Streamlit rather than exposing 8501 publicly.
+`http://YOUR_VPS_IP:8501`
+
+## 8. Run DeepEval from the Streamlit UI
+
+Open **Deep Evaluation** → choose 5–24 cases → **Run DeepEval**.
+
+The report is saved to:
+
+`data/eval_latest.json`
+
+The 70% setting is controlled by:
+
+`EVAL_THRESHOLD=0.70`
+
+It is a real pass/target threshold. The application does not fabricate scores above 70%.
+
+## 9. CLI evaluation option
+
+```bash
+docker compose run --rm hybrid-rag python evals.py --deep --cases 10
+```
+
+## 10. Updating the application
+
+After pushing changes to GitHub:
+
+```bash
+cd /opt/hybrid_rag_spotify
+git pull origin main
+docker compose build --no-cache
+docker compose up -d
+```
+
+If ingestion/chunking/graph extraction changed, rebuild the indexes:
+
+```bash
+docker compose run --rm hybrid-rag python ingest.py --pdf spotify_web_app_architecture.pdf --clear-graph
+docker compose restart hybrid-rag
+```
+
+## 11. Important security notes
+
+- Never commit `.env`.
+- Never put OpenAI or Neo4j passwords in source files.
+- Restrict port 8501 with your VPS firewall if the application should not be public.
+- For production HTTPS, put Nginx/Caddy/Traefik in front of Streamlit.

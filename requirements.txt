@@ -8,3 +8,4 @@ python-dotenv>=1.0.1
 pydantic>=2.8.0
 streamlit>=1.38.0
 scikit-learn>=1.5.0
+deepeval==4.2.3

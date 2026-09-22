@@ -16,6 +16,7 @@ class KnowledgeGraph:
                 "Neo4j configuration is missing. Set NEO4J_URI and NEO4J_PASSWORD."
             )
 
+        self.database = (NEO4J_DATABASE or "neo4j").strip() or "neo4j"
         self.driver = GraphDatabase.driver(
             NEO4J_URI,
             auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
@@ -25,11 +26,11 @@ class KnowledgeGraph:
         self.driver.close()
 
     def clear(self):
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             session.run("MATCH (n) DETACH DELETE n")
 
     def upsert_chunk(self, chunk):
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             session.run(
                 """
                 MERGE (c:Chunk {id: $id})
@@ -41,7 +42,7 @@ class KnowledgeGraph:
             )
 
     def add_entity(self, chunk_id, entity):
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             session.run(
                 """
                 MATCH (c:Chunk {id: $chunk_id})
@@ -54,7 +55,7 @@ class KnowledgeGraph:
             )
 
     def add_relationship(self, source, relation, target):
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             session.run(
                 """
                 MERGE (a:Entity {name: $source})
@@ -70,7 +71,7 @@ class KnowledgeGraph:
         if not entity_names:
             return []
 
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             rows = session.run(
                 """
                 MATCH (c:Chunk)-[:MENTIONS]->(e:Entity)
@@ -93,7 +94,7 @@ class KnowledgeGraph:
             return [dict(row) for row in rows]
 
     def stats(self):
-        with self.driver.session(database=NEO4J_DATABASE) as session:
+        with self.driver.session(database=self.database) as session:
             result = session.run(
                 "MATCH (n) RETURN labels(n)[0] AS label, count(n) AS count"
             )
