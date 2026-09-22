@@ -7,6 +7,12 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hybrid-rag.rule=Host(`hybrid-rag.srv1968517.hstgr.cloud`)"
+      - "traefik.http.routers.hybrid-rag.entrypoints=websecure"
+      - "traefik.http.routers.hybrid-rag.tls.certresolver=letsencrypt"
+      - "traefik.http.services.hybrid-rag.loadbalancer.server.port=8501"
     ports:
       - "8501:8501"
     volumes:
